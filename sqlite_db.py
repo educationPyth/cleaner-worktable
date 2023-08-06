@@ -25,7 +25,8 @@ class DatabaseUserSettings:
 
     def get_data(self):
         self.cursor.execute("SELECT * FROM user_settings")
-        self.conn.commit()
+        rows = self.cursor.fetchall()
+        return rows
 
     def clear_table(self):
         self.cursor.execute("DELETE FROM user_settings")

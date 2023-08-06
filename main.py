@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 from datetime import datetime
@@ -27,13 +28,13 @@ class UserInput:
     def get_path(self):
         return self.path
 
-    def set_sittings(self, name_folder: str, appropriate: list):
+    def set_settings(self, name_folder: str, appropriate: list):
+        # FIXME
         with self.db.conn:
             self.db.set_data(name_folder, appropriate)
 
     def get_settings(self):
         with self.db.conn:
-            print(f"Блок кода в классе UserInput get_settings {self.db.get_data()}")
             return self.db.get_data()
 
     def clear_settings(self):
@@ -82,15 +83,16 @@ class CleanerWorktable:
 def get_data_user():
     user = UserInput(name_table)
     user.set_path(input_user_path_folder)
-    user.set_sittings(input_user_name_folder, input_user_appropriate)
+    user.set_settings(input_user_name_folder, input_user_appropriate)
 
-    print(user.get_settings())
+    def clear_settings():
+        user.clear_settings()
+
     return user.get_settings()
 
 
 def main():
     get_data_user()
-
 
 if __name__ == "__main__":
     main()
