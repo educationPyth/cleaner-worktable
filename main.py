@@ -1,45 +1,5 @@
-import json
 import os
 import shutil
-from datetime import datetime
-from sqlite_db import DatabaseUserSettings
-
-
-input_user_path_folder = r'D:\test folder sort'
-input_user_name_database = 'какое-то название'
-current_date = datetime.now()
-formatted_date = current_date.strftime("%d_%m_%Y")
-formatted_new_database = formatted_date
-name_table = f"Settings_{formatted_new_database}"
-
-input_user_name_folder = "video"
-input_user_appropriate = [".avi", "mp4"]
-
-
-class UserInput:
-    def __init__(self, name_database: str):
-        self.name_database = name_database
-        self.db = DatabaseUserSettings(self.name_database)
-        self.path = ''
-
-    def set_path(self, folder_path):
-        self.path = folder_path
-
-    def get_path(self):
-        return self.path
-
-    def set_settings(self, name_folder: str, appropriate: list):
-        # FIXME
-        with self.db.conn:
-            self.db.set_data(name_folder, appropriate)
-
-    def get_settings(self):
-        with self.db.conn:
-            return self.db.get_data()
-
-    def clear_settings(self):
-        with self.db.conn:
-            self.db.clear_table()
 
 
 class CleanerWorktable:
@@ -80,19 +40,21 @@ class CleanerWorktable:
             print(f"Создана папка {folder_name} и перемещено {len(self.sorted_files[key])} файлов")
 
 
-def get_data_user():
-    user = UserInput(name_table)
-    user.set_path(input_user_path_folder)
-    user.set_settings(input_user_name_folder, input_user_appropriate)
-
-    def clear_settings():
-        user.clear_settings()
-
-    return user.get_settings()
-
-
 def main():
-    get_data_user()
+
+    user_input_path = input('Введите путь к папке: ')
+    user_input_file_types = {
+        "video": [".avi", ".mp4"],
+        "photo": [".jpg", ".jpeg", "png", ".svg"],
+        "music": [".mp3", ".wav"],
+        "documents": [".docx", ".doc", ".txt", ".pdg"],
+        "presentation": [".pptx"]
+    }
+
+    cleaner = CleanerWorktable(user_input_path, user_input_file_types)
+    cleaner.sort_folder()
+    return
+
 
 if __name__ == "__main__":
     main()
