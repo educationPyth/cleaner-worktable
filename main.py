@@ -41,7 +41,6 @@ class CleanerWorktable:
 
 
 def main():
-
     user_input_path = input('Введите путь к папке: ')
     user_input_file_types = {
         "video": [".avi", ".mp4"],
@@ -50,7 +49,6 @@ def main():
         "documents": [".docx", ".doc", ".txt", ".pdg"],
         "presentation": [".pptx"]
     }
-
     cleaner = CleanerWorktable(user_input_path, user_input_file_types)
     return cleaner.sort_folder()
 
