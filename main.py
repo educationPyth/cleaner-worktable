@@ -1,5 +1,36 @@
 import os
 import shutil
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from form import Ui_MainWindow
+
+
+class MyApp(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+        self.text = self.ui.textEdit
+        self.ui.btn_run.clicked.connect(self.send_data)
+
+    def send_data(self):
+        # Получаем текст из поля lineEdit
+        user_path_folder = self.ui.input_path.text()
+        file_types_default = {
+            "video": [".avi", ".mp4", ".mov", ".wmv", ".mkv"],
+            "audio": [".mp3", ".wav", ".flac", ".aac", ".wma"],
+            "picture": [".jpg", ".jpeg", "png", ".svg", ".gif", ".bmp", ".tiff", ".raw", ".ico", ".webp"],
+            "documents": [".docx", ".doc", ".txt", ".pdf", ".xlsx"],
+            "presentation": [".pptx", ".key", ".odp", ".ppt"]
+        }
+        # Создаем экземпляр класса CleanerWorktable
+        cleaner = CleanerWorktable(user_path_folder, file_types_default)
+        # FIXME
+        text = ','.join(cleaner.sort_folder())
+        print(text)
+
+        cleaner.sort_folder()
 
 
 class CleanerWorktable:
@@ -14,6 +45,7 @@ class CleanerWorktable:
         self.sorted_files = {}
 
     def sort_folder(self):
+        data_success = []
         # looping through files and determining their types
         for file in self.files:
             if os.path.isfile(os.path.join(self.full_folder_path, file)):
@@ -31,27 +63,22 @@ class CleanerWorktable:
             folder_name = key
             folder_new_path = os.path.join(self.full_folder_path, folder_name)
             os.makedirs(folder_new_path, exist_ok=True)
-        # move file to appropriate folder
+            # move file to appropriate folder
             for file in self.sorted_files[key]:
                 file_path = os.path.join(self.full_folder_path, file)
                 file_new_path = os.path.join(folder_new_path, file)
                 shutil.move(file_path, file_new_path)
 
-            print(f"Создана папка {folder_name} и перемещено {len(self.sorted_files[key])} файлов")
+            data_success.append(f"Создана папка {folder_name} и перемещено {len(self.sorted_files[key])} файлов")
+        return data_success
 
 
 def main():
-    user_input_path = input('Введите путь к папке: ')
-    user_input_file_types = {
-        "video": [".avi", ".mp4"],
-        "photo": [".jpg", ".jpeg", "png", ".svg"],
-        "music": [".mp3", ".wav"],
-        "documents": [".docx", ".doc", ".txt", ".pdg"],
-        "presentation": [".pptx"]
-    }
-    cleaner = CleanerWorktable(user_input_path, user_input_file_types)
-    return cleaner.sort_folder()
+    cleaner_app = MyApp()
+    cleaner_app.show()
+    return app.exec_()
 
 
 if __name__ == "__main__":
+    app = QApplication([])
     main()
