@@ -52,8 +52,7 @@ def main():
     }
 
     cleaner = CleanerWorktable(user_input_path, user_input_file_types)
-    cleaner.sort_folder()
-    return
+    return cleaner.sort_folder()
 
 
 if __name__ == "__main__":
