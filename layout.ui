@@ -98,7 +98,7 @@ background-color: rgb(53, 53, 53);
 font: 75 12pt &quot;Book Antiqua&quot;;</string>
      </property>
      <property name="text">
-      <string>Cleaner отсортирует файлы по папкам: Video, Music, Pictures, Documents, other</string>
+      <string>Cleaner отсортирует файлы по папкам: Video, Audio, Pictures, Documents, other</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -138,7 +138,9 @@ font: 75 12pt &quot;Book Antiqua&quot;;</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: italic 12pt &quot;Book Antiqua&quot;;</string>
+      <string notr="true">padding: 5px;
+font: 10pt &quot;Arial&quot;;
+word-wrap: wrap;</string>
      </property>
      <property name="tabChangesFocus">
       <bool>false</bool>
@@ -150,8 +152,8 @@ font: 75 12pt &quot;Book Antiqua&quot;;</string>
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Book Antiqua'; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Book Antiqua'; font-size:12pt; font-style:italic;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>

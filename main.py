@@ -1,6 +1,7 @@
 import os
 import shutil
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import QIcon
 from form import Ui_MainWindow
 
 
@@ -10,8 +11,10 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowTitle('Сортировщик')
+        self.setWindowIcon(QIcon('logo.png'))
+        self.textEdit = self.ui.textEdit
 
-        self.text = self.ui.textEdit
         self.ui.btn_run.clicked.connect(self.send_data)
 
     def send_data(self):
@@ -21,16 +24,22 @@ class MyApp(QMainWindow, Ui_MainWindow):
             "video": [".avi", ".mp4", ".mov", ".wmv", ".mkv"],
             "audio": [".mp3", ".wav", ".flac", ".aac", ".wma"],
             "picture": [".jpg", ".jpeg", "png", ".svg", ".gif", ".bmp", ".tiff", ".raw", ".ico", ".webp"],
-            "documents": [".docx", ".doc", ".txt", ".pdf", ".xlsx"],
+            "documents": [".docx", ".doc", ".txt", ".pdf", ".xlsx", ".xls"],
             "presentation": [".pptx", ".key", ".odp", ".ppt"]
         }
         # Создаем экземпляр класса CleanerWorktable
         cleaner = CleanerWorktable(user_path_folder, file_types_default)
-        # FIXME
-        text = ','.join(cleaner.sort_folder())
-        print(text)
-
         cleaner.sort_folder()
+
+        # Получаем текст вывода из cleaner.sort_folder()
+        output_text = ""
+        for key in cleaner.sorted_files:
+            folder_name = key
+            num_files = len(cleaner.sorted_files[key])
+            output_text += f"В папку {folder_name} перемещено файлов: {num_files} \n"
+
+        # Отображаем текст в поле textEdit
+        self.textEdit.setText(f'{output_text}')
 
 
 class CleanerWorktable:
@@ -45,7 +54,6 @@ class CleanerWorktable:
         self.sorted_files = {}
 
     def sort_folder(self):
-        data_success = []
         # looping through files and determining their types
         for file in self.files:
             if os.path.isfile(os.path.join(self.full_folder_path, file)):
@@ -60,6 +68,7 @@ class CleanerWorktable:
 
         # create folders to files for corresponding extensions
         for key in self.sorted_files:
+            data_success = []
             folder_name = key
             folder_new_path = os.path.join(self.full_folder_path, folder_name)
             os.makedirs(folder_new_path, exist_ok=True)
@@ -69,8 +78,7 @@ class CleanerWorktable:
                 file_new_path = os.path.join(folder_new_path, file)
                 shutil.move(file_path, file_new_path)
 
-            data_success.append(f"Создана папка {folder_name} и перемещено {len(self.sorted_files[key])} файлов")
-        return data_success
+
 
 
 def main():

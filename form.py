@@ -54,7 +54,9 @@ class Ui_MainWindow(object):
         self.textEdit.setGeometry(QtCore.QRect(20, 170, 260, 160))
         self.textEdit.setMinimumSize(QtCore.QSize(260, 160))
         self.textEdit.setMaximumSize(QtCore.QSize(260, 160))
-        self.textEdit.setStyleSheet("font: italic 12pt \"Book Antiqua\";")
+        self.textEdit.setStyleSheet("padding: 5px;\n"
+"font: 10pt \"Arial\";\n"
+"word-wrap: wrap;")
         self.textEdit.setTabChangesFocus(False)
         self.textEdit.setReadOnly(True)
         self.textEdit.setObjectName("textEdit")
@@ -68,12 +70,12 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.btn_run.setText(_translate("MainWindow", "Выполнить"))
         self.input_path.setPlaceholderText(_translate("MainWindow", "Введите путь к папке"))
-        self.label.setText(_translate("MainWindow", "Cleaner отсортирует файлы по папкам: Video, Music, Pictures, Documents, other"))
+        self.label.setText(_translate("MainWindow", "Cleaner отсортирует файлы по папкам: Video, Audio, Pictures, Documents, other"))
         self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Book Antiqua\'; font-size:12pt; font-weight:400; font-style:italic;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Book Antiqua\'; font-size:12pt; font-style:italic;\"><br /></p></body></html>"))
 
 
 if __name__ == "__main__":
